@@ -31,6 +31,11 @@ public class HealthCardDetailServiceImpl implements HealthCardDetailService {
     public HealthCardDetailsDTO createHealthcard(HealthCardDetailsDTO healthCardDetailsDTO,String healthCardId) {
         final HeathCardDetailsEntity healthCardDetailsEntity = modelMapper.map(healthCardDetailsDTO, HeathCardDetailsEntity.class);
         healthCardDetailsEntity.setHealthCardId(healthCardId);
+
+        //seth HealthCardDetailsID to MedicineList
+        for (MedicineDetailsEntity medicineDetailsEntity:healthCardDetailsEntity.getMedicineList())
+                medicineDetailsEntity.setHeathCardDetailsEntity(healthCardDetailsEntity);
+
         final HeathCardDetailsEntity savedDtailsHeathCard = healthCardDetailRepo.save(healthCardDetailsEntity);
         final HealthCardDetailsDTO healthcardDTO = modelMapper.map(savedDtailsHeathCard, HealthCardDetailsDTO.class);
        return healthcardDTO;
@@ -45,7 +50,7 @@ public class HealthCardDetailServiceImpl implements HealthCardDetailService {
     }
 
     @Override
-    public String deleteHealthCardDetails(int hCardDetailId) {
+    public String deleteHealthCardDetails(String hCardDetailId) {
 
         final HeathCardDetailsEntity heathCardDetails = healthCardDetailRepo.findById(hCardDetailId).orElseThrow(()-> new RuntimeException("There is no any Data "));
         healthCardDetailRepo.delete(heathCardDetails);
@@ -53,7 +58,7 @@ public class HealthCardDetailServiceImpl implements HealthCardDetailService {
     }
 
     @Override
-    public HealthCardDetailsDTO updateHealthCard(HealthCardDetailsDTO healthCardDetailsDTO,int healthCardDetails) {
+    public HealthCardDetailsDTO updateHealthCard(HealthCardDetailsDTO healthCardDetailsDTO,String healthCardDetails) {
 
         final HeathCardDetailsEntity heathCardDetails = healthCardDetailRepo.findById(healthCardDetails).orElseThrow(() -> new RuntimeException("Health Card Details is found"));
         final HeathCardDetailsEntity heathCardDetailsEntity = modelMapper.map(healthCardDetailsDTO, HeathCardDetailsEntity.class);
@@ -65,7 +70,7 @@ public class HealthCardDetailServiceImpl implements HealthCardDetailService {
         final HeathCardDetailsEntity savedHealthCardDetails = healthCardDetailRepo.save(heathCardDetails);
         return modelMapper.map(savedHealthCardDetails,HealthCardDetailsDTO.class);
     }
-/*
+/*d
     @Override
     public List<MedicineDetailsDTO> getMedicineDetails(int hcDtlId) {
 

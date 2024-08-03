@@ -9,6 +9,9 @@ public class HealthCardApplication implements CommandLineRunner {
 
 	public static void main(String[] args) {
 		SpringApplication.run(HealthCardApplication.class, args);
+
+
+
 	}
 
 	@Override

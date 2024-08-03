@@ -14,10 +14,10 @@ public interface HealthCardDetailService {
         public List<HealthCardDetailsDTO> getAllHealthCardDetailsByHealthCard(String healthCardDtlId);
 
         //Delete healthCardDetails
-        public String deleteHealthCardDetails(int hCardDetailId);
+        public String deleteHealthCardDetails(String hCardDetailId);
 
         //update
-         public HealthCardDetailsDTO updateHealthCard(HealthCardDetailsDTO healthCardDetailsDTO,int hCardDetailsId);
+         public HealthCardDetailsDTO updateHealthCard(HealthCardDetailsDTO healthCardDetailsDTO,String hCardDetailsId);
 
          //get medicine Details
       //  public List<MedicineDetailsDTO> getMedicineDetails(int hcDtlId);

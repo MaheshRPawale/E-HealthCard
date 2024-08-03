@@ -9,7 +9,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface MedicineDetailsEntityRepo extends JpaRepository<MedicineDetailsEntity,Integer> {
+public interface MedicineDetailsEntityRepo extends JpaRepository<MedicineDetailsEntity,String> {
 
 /*
     @Query("Select * from medic")
