@@ -7,7 +7,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface HealthCardDetailRepo extends JpaRepository<HeathCardDetailsEntity,Integer> {
+public interface HealthCardDetailRepo extends JpaRepository<HeathCardDetailsEntity,String> {
 
     //HeathCardDetails findByDoctorId(String doctorId);
     //HeathCardDetail findByDate(Date Date)

@@ -19,6 +19,6 @@ public class MedicineDetailsDTO {
     private String afternRemark;
     private boolean nightYN;
     private String nightRemark;
-    private HeathCardDetailsEntity heathCardDetails;
+    //private HealthCardDetailsDTO heathCardDetails;
 
 }
