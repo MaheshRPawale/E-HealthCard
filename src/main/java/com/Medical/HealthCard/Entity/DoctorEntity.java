@@ -27,6 +27,7 @@ public class DoctorEntity {
     private String hospitalAddress;
     private String hospitalContactNumber;
     private boolean isValidDoctor;
+
     //verification Credential to be part
 
 

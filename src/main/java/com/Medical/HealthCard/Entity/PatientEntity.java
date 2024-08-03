@@ -28,9 +28,9 @@ public class PatientEntity {
     @Column(name = "Patient_health_card_ID")
     private String patientHCID;
     //Relation
-
-    @OneToMany(mappedBy = "patientEntity",cascade = CascadeType.ALL,fetch = FetchType.LAZY)
+/*
+    @OneToMany(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
     private List<HeathCardDetailsEntity> listOfHealthCardDetails=new ArrayList<HeathCardDetailsEntity>();
-
+*/
 
 }

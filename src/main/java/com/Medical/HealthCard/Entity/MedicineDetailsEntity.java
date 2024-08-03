@@ -1,8 +1,11 @@
 package com.Medical.HealthCard.Entity;
 
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
+import org.hibernate.engine.internal.Cascade;
 
 @Getter
 @Setter
@@ -14,8 +17,8 @@ import lombok.*;
 public class MedicineDetailsEntity {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private int medicineId;
+    @GeneratedValue(strategy = GenerationType.UUID)
+    private String medicineId;
     @Column(length = 200)
     private String medicineName;
     private int quantity;
@@ -30,12 +33,11 @@ public class MedicineDetailsEntity {
     private String nightRemark;
 
     //Relations
-    @ManyToOne
-    @JoinColumn(name = "HC_Details_ID")
-    HeathCardDetailsEntity heathCardDetailsEntity;
-
-
-
+    @Setter
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "HC_Details_ID",referencedColumnName ="healthCardDetailsID")
+    @JsonBackReference
+    private HeathCardDetailsEntity heathCardDetailsEntity;
 
 
 }

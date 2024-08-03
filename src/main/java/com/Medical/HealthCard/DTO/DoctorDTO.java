@@ -14,8 +14,6 @@ import lombok.*;
 public class DoctorDTO {
 
 
-
-    private String doctorId;
     private String doctorName;
     private String qualification;
     private String specification;
@@ -23,7 +21,7 @@ public class DoctorDTO {
     private String hospitalName;
     private String hospitalAddress;
     private String hospitalContactNumber;
-    private boolean isValidDoctor;
+    private boolean validDoctor;
 
     //verification Credential to be part
 
