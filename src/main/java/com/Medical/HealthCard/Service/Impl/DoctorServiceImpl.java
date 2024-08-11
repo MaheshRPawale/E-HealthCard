@@ -1,24 +1,21 @@
 package com.Medical.HealthCard.Service.Impl;
 
-import com.Medical.HealthCard.DTO.DoctorDTO;
-import com.Medical.HealthCard.DTO.DoctorVerifiableDTO;
-import com.Medical.HealthCard.DTO.HealthCardDetailsDTO;
+import com.Medical.HealthCard.DTO.*;
 import com.Medical.HealthCard.Entity.DoctorEntity;
 import com.Medical.HealthCard.Entity.DoctorValidateInfo;
 import com.Medical.HealthCard.Entity.PatientEntity;
+import com.Medical.HealthCard.Entity.UserCredential;
 import com.Medical.HealthCard.Repository.DoctorDetailsRepo;
 import com.Medical.HealthCard.Repository.PatientRepo;
+import com.Medical.HealthCard.Repository.UserCredentialRepo;
 import com.Medical.HealthCard.Repository.Verifable;
 import com.Medical.HealthCard.Service.DoctorService;
 import com.Medical.HealthCard.Uitls.ExceptionXHandlers;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.MethodArgumentNotValidException;
-import org.springframework.web.method.annotation.MethodArgumentTypeMismatchException;
 
 import java.util.UUID;
-import java.util.random.RandomGenerator;
 
 @Service
 public class DoctorServiceImpl implements DoctorService {
@@ -35,6 +32,9 @@ public class DoctorServiceImpl implements DoctorService {
 
     @Autowired
     public Verifable verifable;
+
+    @Autowired
+    public UserCredentialRepo userCredentialRepo;
 
 
     @Override
@@ -90,6 +90,7 @@ public class DoctorServiceImpl implements DoctorService {
         return false;
     }
 
+
     @Override
     public DoctorVerifiableDTO addDataVerifiable(DoctorVerifiableDTO doctorVerifiableDTO) {
 
@@ -108,6 +109,14 @@ public class DoctorServiceImpl implements DoctorService {
 
         return null;
     }
+
+    @Override
+    public void saveUserCredential(UserCredentailDTO userCredentailDTO) {
+        UserCredential userCredential = modelMapper.map(userCredentailDTO, UserCredential.class);
+        UserCredential savedUserDetails = userCredentialRepo.save(userCredential);
+
+    }
+
     private boolean validateDoctor(String doctorRegKey , String doctorName){
         final DoctorValidateInfo byRegKey = verifable.findByRegKey(doctorRegKey);
         if(byRegKey!=null)
@@ -118,5 +127,20 @@ public class DoctorServiceImpl implements DoctorService {
 
 
 
+    @Override
+    public DoctorDTO login(LoginDTO loginDTO) {
+
+        String userName=loginDTO.getUserName();
+       UserCredential userCredential = userCredentialRepo.findByUserName(userName);
+
+        DoctorEntity doctorEntity = doctorDetailsRepo.findByUserCredential(userCredential);
+        DoctorDTO doctorDTO;
+        if(doctorEntity!=null)
+            doctorDTO = modelMapper.map(doctorEntity, DoctorDTO.class);
+        else
+            throw new ExceptionXHandlers("Doctor is not found by provided username");
+        return doctorDTO;
+
+    }
 
 }

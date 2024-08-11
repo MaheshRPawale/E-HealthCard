@@ -21,7 +21,7 @@ public class CommonException {
     @ExceptionHandler(ExceptionXHandlers.class)
     public ResponseEntity<ApiResponse> exceptionHandler(ExceptionXHandlers exceptionXHandlers){
         final ApiResponse apiResponse = ApiResponse.builder().massage(exceptionXHandlers.getMessage()).success(false).httpStatus(HttpStatus.BAD_REQUEST).build();
-         return new ResponseEntity<>(apiResponse,HttpStatus.OK);
+         return new ResponseEntity<>(apiResponse,HttpStatus.BAD_REQUEST);
 
     }
 

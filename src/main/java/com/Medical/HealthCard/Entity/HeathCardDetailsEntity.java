@@ -20,7 +20,7 @@ public class HeathCardDetailsEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private String healthCardDetailsID;
-    @JsonFormat(pattern = "yyyy-mm-dd")
+    @JsonFormat(pattern = "yyyy-mm-dd",shape = JsonFormat.Shape.STRING)
     private Date createdDate;
     @Column(length = 1000)
     private String description;
