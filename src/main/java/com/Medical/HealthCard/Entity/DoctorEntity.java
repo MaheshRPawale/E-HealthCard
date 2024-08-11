@@ -28,6 +28,9 @@ public class DoctorEntity {
     private String hospitalContactNumber;
     private boolean isValidDoctor;
 
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "userCredentialId")
+    UserCredential userCredential;
     //verification Credential to be part
 
 

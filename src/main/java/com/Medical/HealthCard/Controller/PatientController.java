@@ -49,6 +49,7 @@ public class PatientController {
         final PatientDTO patientDetail = patientService.getPatientDetail(patientId);
         return new ResponseEntity<>(patientDetail,HttpStatus.OK);
     }
+
     //Appointment Rest API will be created
 
 

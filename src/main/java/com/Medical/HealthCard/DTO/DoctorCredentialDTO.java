@@ -1,16 +1,10 @@
 package com.Medical.HealthCard.DTO;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.validation.Valid;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import lombok.*;
-import org.springframework.validation.annotation.Validated;
 
 @Getter
 @Setter
@@ -18,11 +12,18 @@ import org.springframework.validation.annotation.Validated;
 @NoArgsConstructor
 @Builder
 
-public  class DoctorDTO {
+public  class DoctorCredentialDTO {
+
+
+
+
 
     @NotNull(message = "Doctor Name is Null")
     @NotEmpty(message = "Doctor Name is Empty")
     private String doctorName;
+    @NotNull(message = "User Name is Null")
+    @NotEmpty(message = "User Name is Empty")
+    private String userName;
     @NotEmpty(message = "Qualification is empty ")
     @NotBlank(message = "Qualification is blank")
     private String qualification;
@@ -35,7 +36,10 @@ public  class DoctorDTO {
     private String hospitalAddress;
     @NotBlank(message = "Hopital Contract Number is blank ")
     private String hospitalContactNumber;
-    private boolean validDoctor;
+    @NotNull(message = "Password is Null")
+    @NotEmpty(message = "Password is Empty")
+    private String password;
+    //private boolean validDoctor;
     @NotBlank(message = "Doctor register Key is blank")
     @NotNull(message = "Doctor is null")
     @Max(value = 30)

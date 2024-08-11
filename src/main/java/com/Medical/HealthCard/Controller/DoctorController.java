@@ -33,10 +33,30 @@ public class DoctorController {
 
 
     @PostMapping("/new")
-    public ResponseEntity<DoctorDTO> createNewDoctReg(@Valid @RequestBody DoctorDTO doctorDTO
+    public ResponseEntity<DoctorDTO> createNewDoctReg(@Valid @RequestBody DoctorCredentialDTO doctorCredentialDTO
     )
     {
+
+        DoctorDTO doctorDTO = DoctorDTO.builder()
+                .doctorName(doctorCredentialDTO.getDoctorName())
+                .qualification(doctorCredentialDTO.getQualification())
+                .specification(doctorCredentialDTO.getSpecification())
+                .hospitalId(doctorCredentialDTO.getHospitalId())
+                .hospitalAddress(doctorCredentialDTO.getHospitalAddress())
+                .hospitalContactNumber(doctorCredentialDTO.getHospitalContactNumber())
+                .hospitalName(doctorCredentialDTO.getHospitalName())
+                .doctorRegKey(doctorCredentialDTO.getDoctorRegKey())
+                //.validDoctor(doctorCredentialDTO.isValidDoctor())
+                .build();
+
+        UserCredentailDTO doctorCredential = UserCredentailDTO.builder()
+                .userName(doctorCredentialDTO.getUserName())
+                .password(doctorCredentialDTO.getPassword())
+                .build();
+
+
         final DoctorDTO createdDoctor = doctorService.createDoctor(doctorDTO);
+        doctorService.saveUserCredential(doctorCredential);
         return new ResponseEntity<>(createdDoctor, HttpStatus.OK);
     }
     @DeleteMapping("/delete")
@@ -60,6 +80,18 @@ public class DoctorController {
         return new ResponseEntity<>(savedDoctorDTO,HttpStatus.OK);
     }
 
+    //Login
+    @GetMapping("/login")
+    public ResponseEntity<DoctorDTO> loginDoctor(
+            @RequestBody LoginDTO loginDTO
+    ){
+        DoctorDTO doctorDTO = doctorService.login(loginDTO);
+        return new ResponseEntity<>(doctorDTO,HttpStatus.OK);
+
+    }
+
+
+
     //Craete patient
 
 
@@ -67,7 +99,6 @@ public class DoctorController {
     public  ResponseEntity<PatientDTO> createPatient(
 
          @Valid  @RequestBody PatientDTO patientDTO
-
 
     ){
         final PatientDTO patient = patientService.createPatient(patientDTO);

@@ -1,11 +1,6 @@
 package com.Medical.HealthCard.Service;
 
-import com.Medical.HealthCard.DTO.DoctorDTO;
-import com.Medical.HealthCard.DTO.DoctorVerifiableDTO;
-import com.Medical.HealthCard.DTO.HealthCardDetailsDTO;
-import com.Medical.HealthCard.DTO.PatientDTO;
-
-import javax.swing.plaf.PanelUI;
+import com.Medical.HealthCard.DTO.*;
 
 public interface DoctorService {
 
@@ -21,7 +16,7 @@ public interface DoctorService {
     //verify
     public  boolean verify();
 
-
+    public DoctorDTO login(LoginDTO loginDTO);
     public DoctorVerifiableDTO addDataVerifiable(DoctorVerifiableDTO doctorVerifiableDTO);
     /***
      *  B Part for functionality as well be added
@@ -29,6 +24,8 @@ public interface DoctorService {
 
     public String createHCOfPatient(String PatientId, HealthCardDetailsDTO healthCardDetailsDTO);
 
+
+    public void saveUserCredential(UserCredentailDTO userCredentailDTO);
 
 
 }
