@@ -5,7 +5,10 @@ import jakarta.persistence.Column;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import lombok.*;
+import org.springframework.validation.annotation.Validated;
 
 import java.util.ArrayList;
 
@@ -14,12 +17,17 @@ import java.util.ArrayList;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
+@Validated
 public class PatientDTO {
 
-
+    @NotBlank(message = "Patient is blank")
+    @NotNull(message = "Patient is null")
     private String patientName;
+    @NotBlank(message = "Patient's mail is blank")
     private String patientMail;
+    @NotBlank(message = "Patient's conntact is blank")
     private String patientContact;
+    @NotNull(message = "Patient's Health card id is blank")
     private String patientHCID;
 
     //private ArrayList<HeathCardDetailsEntity> listOfHealthCardDetails=new ArrayList<HeathCardDetailsEntity>();

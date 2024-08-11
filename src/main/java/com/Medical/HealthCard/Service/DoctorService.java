@@ -1,6 +1,7 @@
 package com.Medical.HealthCard.Service;
 
 import com.Medical.HealthCard.DTO.DoctorDTO;
+import com.Medical.HealthCard.DTO.DoctorVerifiableDTO;
 import com.Medical.HealthCard.DTO.HealthCardDetailsDTO;
 import com.Medical.HealthCard.DTO.PatientDTO;
 
@@ -21,6 +22,7 @@ public interface DoctorService {
     public  boolean verify();
 
 
+    public DoctorVerifiableDTO addDataVerifiable(DoctorVerifiableDTO doctorVerifiableDTO);
     /***
      *  B Part for functionality as well be added
      */
