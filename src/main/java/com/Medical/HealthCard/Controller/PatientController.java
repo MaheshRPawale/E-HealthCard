@@ -2,6 +2,7 @@ package com.Medical.HealthCard.Controller;
 
 import com.Medical.HealthCard.DTO.PatientDTO;
 import com.Medical.HealthCard.Service.PatientService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,7 +19,7 @@ public class PatientController {
     //craete
     @PostMapping("/create-Patient")
     public ResponseEntity<PatientDTO> createPatient(
-            @RequestBody PatientDTO patientDTO
+           @Valid @RequestBody PatientDTO patientDTO
     )
     {
         final PatientDTO patient = patientService.createPatient(patientDTO);
@@ -31,7 +32,7 @@ public class PatientController {
     //update
     @PutMapping("/{patientId}/update-patient")
     public ResponseEntity<PatientDTO> updatePatient(
-            @RequestBody PatientDTO patientDTO,
+        @Valid @RequestBody PatientDTO patientDTO,
             @PathVariable(name = "patientId") String patientId
 
     ){

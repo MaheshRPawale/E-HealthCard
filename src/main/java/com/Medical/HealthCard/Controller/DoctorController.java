@@ -1,21 +1,20 @@
 package com.Medical.HealthCard.Controller;
 
-import com.Medical.HealthCard.DTO.DoctorDTO;
-import com.Medical.HealthCard.DTO.HealthCardDetailsDTO;
-import com.Medical.HealthCard.DTO.MedicineDetailsDTO;
-import com.Medical.HealthCard.DTO.PatientDTO;
+import com.Medical.HealthCard.DTO.*;
+import com.Medical.HealthCard.Repository.Verifable;
 import com.Medical.HealthCard.Service.DoctorService;
 import com.Medical.HealthCard.Service.HealthCardDetailService;
 import com.Medical.HealthCard.Service.PatientService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-
 @RestController
 @RequestMapping("/doctor")
 public class DoctorController {
@@ -31,9 +30,10 @@ public class DoctorController {
     @Autowired
     public HealthCardDetailService healthCardDetailService;
 
+
+
     @PostMapping("/new")
-    public ResponseEntity<DoctorDTO> createNewDoctReg(
-        @RequestBody DoctorDTO doctorDTO
+    public ResponseEntity<DoctorDTO> createNewDoctReg(@Valid @RequestBody DoctorDTO doctorDTO
     )
     {
         final DoctorDTO createdDoctor = doctorService.createDoctor(doctorDTO);
@@ -66,7 +66,7 @@ public class DoctorController {
     @PostMapping("/createPatient")
     public  ResponseEntity<PatientDTO> createPatient(
 
-            @RequestBody PatientDTO patientDTO
+         @Valid  @RequestBody PatientDTO patientDTO
 
 
     ){
@@ -90,7 +90,7 @@ public class DoctorController {
     @PostMapping("/{healthCardDeatilId}/updateDetails")
     public ResponseEntity<HealthCardDetailsDTO>  updateHealthCardDetail(
 
-            @PathVariable(name = "healthCardDeatilId") int healthCardID,
+            @PathVariable(name = "healthCardDeatilId") String healthCardID,
             @RequestBody HealthCardDetailsDTO healthCardDetailsDTO
 
     ){
@@ -104,12 +104,30 @@ public class DoctorController {
     //GetListOfHealthCardDeatails
     @GetMapping("/getHCDetails")
     public ResponseEntity<List<HealthCardDetailsDTO>> gethealthCardDetails(
-            @RequestParam String hCDtlID
+            @RequestParam String healthCardId
     ){
-        final List<HealthCardDetailsDTO> allHealthCardDetailsByHealthCard = healthCardDetailService.getAllHealthCardDetailsByHealthCard(hCDtlID);
+        final List<HealthCardDetailsDTO> allHealthCardDetailsByHealthCard = healthCardDetailService.getAllHealthCardDetailsByHealthCard(healthCardId);
         return new ResponseEntity<>(allHealthCardDetailsByHealthCard,HttpStatus.OK);
 
     }
+
+    @PostMapping("/AddVerifyDocotor")
+    public ResponseEntity<DoctorVerifiableDTO> createDoctorVerifiableData(
+
+            @Valid @RequestBody DoctorVerifiableDTO doctorVerifiableDTO
+
+    ){
+
+        final DoctorVerifiableDTO doctorVerifiableData = doctorService.addDataVerifiable(doctorVerifiableDTO);
+        return  new ResponseEntity<>(doctorVerifiableData,HttpStatus.OK);
+
+        
+
+    }
+
+
+
+
 
     //GetListOfMedicineDetails
 /*    @GetMapping("/getHCDetails")
