@@ -1,6 +1,8 @@
 package com.Medical.HealthCard.Controller;
 
+import com.Medical.HealthCard.DTO.HealthCardDetailsDTO;
 import com.Medical.HealthCard.DTO.PatientDTO;
+import com.Medical.HealthCard.Service.HealthCardDetailService;
 import com.Medical.HealthCard.Service.PatientService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,13 +10,17 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
-@RequestMapping("/l")
+@RequestMapping("/Patient")
 public class PatientController {
 
 
     @Autowired
     private PatientService patientService;
+    @Autowired
+    public HealthCardDetailService healthCardDetailService;
 
     //craete
     @PostMapping("/create-Patient")
@@ -48,6 +54,15 @@ public class PatientController {
     ){
         final PatientDTO patientDetail = patientService.getPatientDetail(patientId);
         return new ResponseEntity<>(patientDetail,HttpStatus.OK);
+    }
+
+    @GetMapping("/getHCDetails")
+    public ResponseEntity<List<HealthCardDetailsDTO>> gethealthCardDetails(
+            @RequestParam String healthCardId
+    ){
+        final List<HealthCardDetailsDTO> allHealthCardDetailsByHealthCard = healthCardDetailService.getAllHealthCardDetailsByHealthCard(healthCardId);
+        return new ResponseEntity<>(allHealthCardDetailsByHealthCard,HttpStatus.OK);
+
     }
 
     //Appointment Rest API will be created

@@ -117,7 +117,7 @@ public class DoctorController {
     }
 
 
-//updateHealthCard
+    //updateHealthCard
     @PostMapping("/{healthCardDeatilId}/updateDetails")
     public ResponseEntity<HealthCardDetailsDTO>  updateHealthCardDetail(
 

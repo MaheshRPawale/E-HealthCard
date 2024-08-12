@@ -30,7 +30,7 @@ public class HeathCardDetailsEntity {
     private String allergy;
     private String healthCardId;
     ///Relations
-    @OneToMany(mappedBy = "heathCardDetailsEntity",cascade = CascadeType.ALL,orphanRemoval = true)
+    @OneToMany(mappedBy = "heathCardDetailsEntity",cascade = CascadeType.ALL)
     @JsonManagedReference
     private List<MedicineDetailsEntity> medicineList=new ArrayList<MedicineDetailsEntity>();
 

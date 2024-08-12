@@ -1,11 +1,10 @@
 package com.Medical.HealthCard.Entity;
 
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.OneToOne;
+import jakarta.persistence.*;
 import lombok.*;
+
+import java.util.UUID;
 
 @Entity
 @Getter
@@ -16,6 +15,7 @@ import lombok.*;
 public class UserCredential {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.UUID)
     private String userId;
     @Column(unique = true)
     private String userName;

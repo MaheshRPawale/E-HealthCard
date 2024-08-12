@@ -131,11 +131,14 @@ public class DoctorServiceImpl implements DoctorService {
     public DoctorDTO login(LoginDTO loginDTO) {
 
         String userName=loginDTO.getUserName();
-       UserCredential userCredential = userCredentialRepo.findByUserName(userName);
-
+        String password=loginDTO.getPassword();
+        UserCredential userCredential = userCredentialRepo.findByUserName(userName);
         DoctorEntity doctorEntity = doctorDetailsRepo.findByUserCredential(userCredential);
+        final boolean passwordValid = userCredential.getPassword().equals(password);
+        final boolean userNameValid = userCredential.getUserId().equals(userName);
+        boolean validUser=userNameValid&passwordValid;
         DoctorDTO doctorDTO;
-        if(doctorEntity!=null)
+        if(doctorEntity!=null && validUser)
             doctorDTO = modelMapper.map(doctorEntity, DoctorDTO.class);
         else
             throw new ExceptionXHandlers("Doctor is not found by provided username");

@@ -42,7 +42,7 @@ public  class DoctorCredentialDTO {
     //private boolean validDoctor;
     @NotBlank(message = "Doctor register Key is blank")
     @NotNull(message = "Doctor is null")
-    @Max(value = 30)
+    //@Max(value = 30 , message = "Doctor Registration key is exteded")
     private String doctorRegKey;
     //verification Credential to be part
 

@@ -1,6 +1,7 @@
 package com.Medical.HealthCard.DTO;
 
 import com.Medical.HealthCard.Entity.HeathCardDetailsEntity;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.Column;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -27,7 +28,7 @@ public class PatientDTO {
     private String patientMail;
     @NotBlank(message = "Patient's conntact is blank")
     private String patientContact;
-    @NotNull(message = "Patient's Health card id is blank")
+
     private String patientHCID;
 
     //private ArrayList<HeathCardDetailsEntity> listOfHealthCardDetails=new ArrayList<HeathCardDetailsEntity>();
